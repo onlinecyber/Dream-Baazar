@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="hi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dream Baazar — Multi Bazar</title>
+  <meta name="description" content="Live bazar result board — mobile-first. Admin updates results to Firebase." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="logo">⭐</div>
+      <div class="brand">
+        <div class="title">Dream Baazar</div>
+        <div class="subtitle">Live Bazar Results</div>
+      </div>
+    </header>
+
+    <main id="bazars" class="bazars"></main>
+    <div class="bar">
+      <ul>
+        <li><a href="https://wa.me/+917369072024" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
+        <li><a href="smr919480@gmail.com" target="_blank"><i class="fa-regular fa-envelope-open"></i></a></li>
+      </ul>
+    </div>
+
+    <section class="instructions">
+      <h3>DISCLAIMER</h3>
+      <ul>
+        <li>यह स्पष्ट रूप से जुआ, सट्टेबाजी या पैसे से संबंधित गतिविधियों को बढ़ावा देने से इनकार करता है, और ऐसी सेवाओं
+          की पेशकश नहीं करता है।
+        </li>
+        <li>उपयोगकर्ता स्थानीय कानूनों का पालन करने के लिए जिम्मेदार हैं, और वेबसाइट अपनी सामग्री के आधार पर वित्तीय
+          परिणामों के लिए उत्तरदायी नहीं है।
+        </li>
+        <li>साइट कभी भी पैसे या व्यक्तिगत जानकारी का अनुरोध नहीं करती है</li>
+      </ul>
+    </section>
+
+    <footer>© Result board — only information. No gambling affiliation.</footer>
+
+    <!-- Admin panel -->
+    <section id="admin-panel" class="hidden">
+      <div class="admin-panel">
+        <h3>Admin Panel</h3>
+        <p>Use secret URL <code>?admin=Sonu0786</code> or enter key below.</p>
+        <input id="adminKey" type="password" placeholder="Admin key">
+        <button id="unlockBtn">Unlock</button>
+
+        <div id="adminEditor" class="hidden">
+          <div id="adminFields"></div>
+          <div style="margin-top:10px">
+            <button id="saveBtn">Save Results</button>
+            <button id="unlockUrlBtn">Clear DB Lock (admin only)</button>
+          </div>
+          <p id="adminNote"></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ❌ Removed because JSON cannot be loaded as script -->
+  <!-- <script src="result.json" defer></script> -->
+
+  <!-- ✔ Correct: Only result.js is needed (includes Firebase imports) -->
+  <script type="module" src="result.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+
+:root{
+  --bg:#ffffff;
+  --muted:#6b7280;
+  --card:#0b0b0b;
+  --accent:#4da3ff;
+  --success:#ff8a3d;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Arial;
+  background:var(--bg);
+  color:#111;
+  padding:18px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.header{display:flex;align-items:center;gap:12px;padding:12px}
+.logo{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;background:linear-gradient(90deg,#111,#333);color:#fff}
+.brand .title{font-weight:900;letter-spacing:0.8px;font-size:22px}
+.brand .subtitle{font-size:13px;color:var(--muted)}
+
+.bazars{display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding-top:0;
+}
+.bazar-card{
+    padding:2px;
+    border-radius:14px;
+    background:var(--card);
+    color:#fff;border:1px solid rgba(255,255,255,0.04);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    text-align: center;
+    padding-top: 10%;
+}
+.bazar-name{
+    font-weight:700;
+    font-size:16px;
+    margin-top:-50px;
+    padding: 5px  10px;
+    text-align: center;
+}
+.bazar-times{font-size:13px;
+    color:#c6d216;
+}
+.timer{font-family:monospace;font-weight:700;background:transparent;padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06)}
+.result-box{min-width:120px;padding:12px 18px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:26px;letter-spacing:1px;background:#111;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 30px rgba(0,0,0,0.5);color:var(--accent)}
+.result-box.live{color:var(--success);animation:glowPulse 1.4s infinite}
+@keyframes glowPulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+.bar ul{
+    list-style: none;
+    
+}
+.bar ul li{
+    display:inline-block;
+    width: 70px;
+    height: 70px;
+    border: 0px solid gray;
+    border-radius: 50%;
+    margin-left:20%; 
+    box-shadow: 5px 5px 5px 5px gray,7px 7px 2px 2px lime;
+}
+.bar ul li a{
+    text-decoration: none;
+}
+.bar ul li a .fa-brands{
+    line-height:1.4;
+    padding-left:12%;
+    font-size:3em;
+
+}
+
+.bar ul li a .fa-regular{
+    line-height:1.3;
+    padding-left:12%;
+    font-size:3em;
+}
+
+
+
+
+.instructions{padding:12px;border-radius:12px;background:#f3f4f6;border:1px solid #e5e7eb;color:var(--muted)}
+footer{padding:12px;border-radius:12px;text-align:center;color:var(--muted);font-size:13px}
+
+.admin-panel{padding:12px;border-radius:12px;background:#0b1020;color:#fff;border:1px solid rgba(255,255,255,0.04)}
+.admin-panel input[type="password"]{width:100%;padding:8px;border-radius:6px;border:1px solid #333;background:#0f1724;color:#fff;margin-top:6px}
+.hidden{display:none}
+
+@media(min-width:720px){
+  .bazars{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+}
+@media(min-width:1100px){
+  .bazars{grid-template-columns:repeat(3,1fr)}
+}
+.admin-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.admin-row input{padding:6px;border-radius:6px;border:1px solid #333;background:#0f1724;color:#fff}
+.admin-row button{padding:6px;border-radius:6px;background:#4da3ff;border:none;color:#000;cursor:pointer}
