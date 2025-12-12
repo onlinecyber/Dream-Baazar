@@ -43,6 +43,7 @@ const BAZARS = [
   { id: 'khaja_garib', name: 'KHAJA GARIB', open: '09:30' },
   { id: 'khaja_garib_nawaz', name: 'KHAJA GARIB NAWAZ', open: '10:30' },
   { id: 'dehli_baba', name: 'DEHLI BABA', open: '11:45' },
+  { id: 'baba_ka_gali', name: 'BABA KA GALI', open: '11:45' },
   { id: 'azmer_sharif', name: 'AZMER SHARIF', open: '12:30' },
   { id: 'dehli_nor_yalai', name: 'DEHLI NOR YALAI', open: '18:30' },
   { id: 'noida_bazar', name: 'NOIDA BAZAR', open: '16:30' },
