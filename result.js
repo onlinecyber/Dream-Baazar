@@ -51,8 +51,7 @@ const BAZARS = [
   { id: 'ram_mandir_5', name: 'RAM MANDIR 5', open: '15:00' },
   { id: 'east_dehli', name: 'EAST DEHLI', open: '09:30' },
   { id: 'faridabad_baba', name: 'FARIDABAD BABA', open: '11:00' },
-  { id: 'ganesh_matka' , name: 'GANESH MATKA', open: '10:00' },
-  { id: 'rajdhani_matka' , name: 'RAJDHANI MATKA', open" '09:00' }
+  { id: 'ganesh_matka' , name: 'GANESH MATKA', open: '10:00' }
 ];
 
 
