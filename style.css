@@ -43,6 +43,56 @@ body{
     text-align: center;
     padding-top: 10%;
 }
+.top-disclaimer {
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Red Box */
+.disc-box.red {
+  background: #ff4b4b;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.disc-box.red p {
+  color: white;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Updated Date */
+.disc-box.updated {
+  background: #f6f6f6;
+  border-left: 5px solid green;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.disc-box.updated p {
+  color: #333;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Green Bar */
+.disc-box.green {
+  background: #11b57a;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.disc-box.green p {
+  color: white;
+  font-size: 15px;
+  margin: 0;
+  font-weight: 700;
+}
+
 .bazar-name{
     font-weight:700;
     font-size:16px;
