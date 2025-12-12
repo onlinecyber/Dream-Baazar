@@ -26,6 +26,12 @@ body{
     gap:12px;
     padding-top:0;
 }
+.logo img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+} 
 .bazar-card{
     padding:2px;
     border-radius:14px;
