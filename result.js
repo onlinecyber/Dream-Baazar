@@ -44,7 +44,7 @@ const BAZARS = [
   { id: 'khaja_garib_nawaz', name: 'KHAJA GARIB NAWAZ', open: '10:30' },
   { id: 'dehli_baba', name: 'DEHLI BABA', open: '11:45' },
   { id: 'azmer_sharif', name: 'AZMER SHARIF', open: '12:30' },
-  { id: 'shri_devi_matka', name: 'SHARI DEVI MATKA', open: '13:30' },
+  { id: 'shri_devi_matka', name: 'SHRI DEVI MATKA', open: '13:30' },
   { id: 'dehli_nor_yalai', name: 'DEHLI NOR YALAI', open: '18:30' },
   { id: 'noida_bazar', name: 'NOIDA BAZAR', open: '16:30' },
   { id: 'ahmedabad_city', name: 'AHMEDABAD CITY', open: '12:30' },
