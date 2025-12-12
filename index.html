@@ -48,7 +48,9 @@
 
 </section>
 <!-- ⭐ MONTHLY CHART TABLE (Screenshot जैसा) -->
-<section id="records-section" style="display:none; padding:10px;">
+<section id="records-section" style="padding:10px;">
+  <button onclick="showRecords()">Show Monthly Chart</button>
+
 
   <!-- Top blue bar -->
   <div style="
@@ -187,6 +189,13 @@
 
   <!-- ✔ Correct: Only result.js is needed (includes Firebase imports) -->
   <script type="module" src="result.js"></script>
+  <script>
+  function showRecords() {
+    document.getElementById("records-section").style.display = "block";
+    window.scrollTo(0, document.getElementById("records-section").offsetTop);
+  }
+</script>
+
 </body>
 
 </html>
