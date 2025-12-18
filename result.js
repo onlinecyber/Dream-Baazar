@@ -96,18 +96,26 @@ BAZARS.forEach(b => {
   bazarsContainer.appendChild(card);
 
   // 🔥 Firebase listener
-  onValue(ref(db, "results/" + b.id), snap => {
+ onValue(ref(db, "results/" + b.id), snap => {
   const data = snap.val() || {};
 
-  const todayVal =
-    data.today && typeof data.today === "object"
-      ? data.today.value
-      : data.today || "XX";
+  function resolveVal(v) {
+    if (!v) return "XX";
+    if (typeof v === "string" || typeof v === "number") return v;
+    if (typeof v === "object") {
+      if (typeof v.value === "string" || typeof v.value === "number") {
+        return v.value;
+      }
+      // agar galti se nested object ho
+      if (typeof v.value === "object" && v.value.value) {
+        return v.value.value;
+      }
+    }
+    return "XX";
+  }
 
-  const yesterdayVal =
-    data.yesterday && typeof data.yesterday === "object"
-      ? data.yesterday.value
-      : data.yesterday || "XX";
+  const todayVal = resolveVal(data.today);
+  const yesterdayVal = resolveVal(data.yesterday);
 
   const todayEl = document.getElementById("today-" + b.id);
   const yesterdayEl = document.getElementById("yesterday-" + b.id);
@@ -117,6 +125,7 @@ BAZARS.forEach(b => {
   if (yesterdayEl) yesterdayEl.textContent = yesterdayVal;
   if (nameEl) nameEl.textContent = data.name || b.name;
 });
+
 
 
 // ------------------------------------
