@@ -74,21 +74,25 @@ BAZARS.forEach(b => {
   card.id = "card-" + b.id;
 
   card.innerHTML = `
-      <div class="bazar-row">
-          <div>
-              <div class="bazar-name" id="name-${b.id}">${b.name}</div>
-              <div class="bazar-times">Open: ${b.open}</div>
-          </div>
-          <div class="meta">
-              <div class="label">Remaining Time</div>
-              <div class="timer" id="timer-${b.id}">--:--:--</div>
-          </div>
-      </div>
+   <div>
+      <div class="bazar-name" id="name-${b.id}">${b.name}</div>
+      <div class="bazar-times">Open: ${b.open}</div>
+      <div class="timer" id="timer-${b.id}">--:--:--</div>
+    </div>
 
-      <div class="result-wrap">
-          <div class="result-title">Result</div>
-          <div class="result-box" id="result-${b.id}" data-result="--">--</div>
+    <div class="result-wrap">
+      <div class="result-title">Result</div>
+      <div class="result-row">
+        <div class="result-item">
+          <span class="result-label">कल</span>
+          <div class="result-box" id="yesterday-${b.id}">XX</div>
+        </div>
+        <div class="result-item">
+          <span class="result-label">आज</span>
+          <div class="result-box live" id="today-${b.id}">XX</div>
+        </div>
       </div>
+    </div>
   `;
 
   bazarsContainer.appendChild(card);
