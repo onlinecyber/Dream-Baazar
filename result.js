@@ -1,5 +1,5 @@
 // =====================================
-// FINAL result.js (CLEAN + AUTO SHIFT)
+// FINAL result.js (STABLE + CLEAN)
 // =====================================
 
 // Firebase imports
@@ -13,7 +13,7 @@ import {
 
 
 // ------------------------------------
-// 🔥 FIREBASE CONFIG (APNI REAL KEYS DALO)
+// 🔥 FIREBASE CONFIG
 // ------------------------------------
 const firebaseConfig = {
   apiKey: "AIzaSyBwqwNFAlRGPRRSPxLLSpryyDmpuCB6asc",
@@ -30,13 +30,13 @@ const db = getDatabase(app);
 
 
 // ------------------------------------
-// 🔐 ADMIN KEY (URL BASED)
+// 🔐 ADMIN KEY
 // ------------------------------------
 const ADMIN_KEY = "Sonu0786";
 
 
 // ------------------------------------
-// 🏪 BAZAR LIST (tumhari list)
+// 🏪 BAZARS LIST
 // ------------------------------------
 const BAZARS = [
   { id: 'khaja_garib', name: 'KHAJA GARIB', open: '09:30' },
@@ -55,6 +55,17 @@ const BAZARS = [
 
 
 // ------------------------------------
+// HELPERS
+// ------------------------------------
+function cleanValue(v) {
+  if (!v) return "XX";
+  if (typeof v === "string" || typeof v === "number") return String(v);
+  if (typeof v === "object" && v.value) return String(v.value);
+  return "XX";
+}
+
+
+// ------------------------------------
 // DOM
 // ------------------------------------
 const bazarsContainer = document.getElementById("bazars");
@@ -64,7 +75,7 @@ const adminFields = document.getElementById("adminFields");
 
 
 // ------------------------------------
-// 🧱 CREATE BAZAR CARDS
+// CREATE BAZAR CARDS + LISTENER
 // ------------------------------------
 BAZARS.forEach(b => {
 
@@ -95,41 +106,27 @@ BAZARS.forEach(b => {
 
   bazarsContainer.appendChild(card);
 
-  // 🔥 Firebase listener
- onValue(ref(db, "results/" + b.id), snap => {
-  const data = snap.val() || {};
+  onValue(ref(db, "results/" + b.id), snap => {
+    const data = snap.val() || {};
 
-  function resolveVal(v) {
-    if (!v) return "XX";
-    if (typeof v === "string" || typeof v === "number") return v;
-    if (typeof v === "object") {
-      if (typeof v.value === "string" || typeof v.value === "number") {
-        return v.value;
-      }
-      // agar galti se nested object ho
-      if (typeof v.value === "object" && v.value.value) {
-        return v.value.value;
-      }
-    }
-    return "XX";
-  }
+    const todayVal = cleanValue(data.today);
+    const yesterdayVal = cleanValue(data.yesterday);
 
-  const todayVal = resolveVal(data.today);
-  const yesterdayVal = resolveVal(data.yesterday);
+    const todayEl = document.getElementById("today-" + b.id);
+    const yesterdayEl = document.getElementById("yesterday-" + b.id);
+    const nameEl = document.getElementById("name-" + b.id);
 
-  const todayEl = document.getElementById("today-" + b.id);
-  const yesterdayEl = document.getElementById("yesterday-" + b.id);
-  const nameEl = document.getElementById("name-" + b.id);
+    if (todayEl) todayEl.textContent = todayVal;
+    if (yesterdayEl) yesterdayEl.textContent = yesterdayVal;
+    if (nameEl) nameEl.textContent = data.name || b.name;
+  });
 
-  if (todayEl) todayEl.textContent = todayVal;
-  if (yesterdayEl) yesterdayEl.textContent = yesterdayVal;
-  if (nameEl) nameEl.textContent = data.name || b.name;
+  startTimer(b);
 });
 
 
-
 // ------------------------------------
-// ⏱ TIMER
+// TIMER
 // ------------------------------------
 function startTimer(b) {
   const el = document.getElementById("timer-" + b.id);
@@ -146,13 +143,13 @@ function startTimer(b) {
 
   setInterval(() => {
     let diff = target - new Date();
-    if (diff <= 0) {
-      target = nextTime(b.open);
-      diff = target - new Date();
-    }
+    if (diff <= 0) target = nextTime(b.open);
+
+    diff = target - new Date();
     const h = Math.floor(diff / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
     const s = Math.floor((diff % 60000) / 1000);
+
     el.textContent =
       String(h).padStart(2, "0") + ":" +
       String(m).padStart(2, "0") + ":" +
@@ -162,11 +159,10 @@ function startTimer(b) {
 
 
 // ------------------------------------
-// 🔓 ADMIN MODE (?admin=Sonu0786)
+// ADMIN MODE
 // ------------------------------------
 if (new URLSearchParams(location.search).get("admin") === ADMIN_KEY) {
   adminPanel.classList.remove("hidden");
-  adminEditor.classList.remove("hidden");
   adminEditor.classList.remove("hidden");
   adminFields.style.display = "block";
   loadAdminFields();
@@ -174,7 +170,7 @@ if (new URLSearchParams(location.search).get("admin") === ADMIN_KEY) {
 
 
 // ------------------------------------
-// 🛠 ADMIN INPUTS (ONLY TODAY)
+// ADMIN INPUTS
 // ------------------------------------
 async function loadAdminFields() {
   adminFields.innerHTML = "";
@@ -183,19 +179,14 @@ async function loadAdminFields() {
   const data = snap.exists() ? snap.val() : {};
 
   BAZARS.forEach(b => {
-    const todayVal = data[b.id]?.today?.value || "";
+    const todayVal = cleanValue(data[b.id]?.today);
 
     const row = document.createElement("div");
     row.className = "admin-row";
 
     row.innerHTML = `
-      <label style="font-weight:600">${b.name}</label>
-      <input
-        id="edit-${b.id}"
-        placeholder="Today result"
-        value="${todayVal}"
-        style="padding:8px; margin-bottom:10px;"
-      />
+      <label>${b.name}</label>
+      <input id="edit-${b.id}" value="${todayVal}" />
     `;
 
     adminFields.appendChild(row);
@@ -204,7 +195,7 @@ async function loadAdminFields() {
 
 
 // ------------------------------------
-// 💾 SAVE (AUTO SHIFT)
+// SAVE RESULTS (AUTO SHIFT)
 // ------------------------------------
 document.getElementById("saveBtn")?.addEventListener("click", async () => {
 
@@ -215,22 +206,23 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
   const todayDate = new Date().toISOString().slice(0, 10);
 
   BAZARS.forEach(b => {
-
     const input = document.getElementById("edit-" + b.id);
     if (!input) return;
 
-    const newTodayValue = input.value.trim();
-    if (!newTodayValue) return;
+    const newVal = input.value.trim();
+    if (!newVal) return;
 
-    const oldTodayValue = oldData[b.id]?.today?.value || "XX";
-
-    if (newTodayValue === oldTodayValue) return;
+    const oldToday = cleanValue(oldData[b.id]?.today);
+    if (newVal === oldToday) return;
 
     updates["results/" + b.id] = {
       name: b.name,
-      yesterday: oldData[b.id]?.today || { value: "XX", date: "N/A" },
+      yesterday: {
+        value: oldToday,
+        date: oldData[b.id]?.today?.date || todayDate
+      },
       today: {
-        value: newTodayValue,
+        value: newVal,
         date: todayDate
       }
     };
@@ -244,4 +236,3 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
   await update(ref(db), updates);
   alert("✅ Result updated successfully");
 });
-
