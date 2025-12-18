@@ -201,4 +201,7 @@ footer{padding:12px;border-radius:12px;text-align:center;color:var(--muted);font
   color:#39ff7b;
   box-shadow:0 0 10px rgba(57,255,123,0.6);
 }
+#adminFields{
+  display: block;
+}
 
