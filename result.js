@@ -97,15 +97,23 @@ BAZARS.forEach(b => {
 
   // 🔥 Firebase listener
   onValue(ref(db, "results/" + b.id), snap => {
-    const data = snap.val() || {};
-    document.getElementById("today-" + b.id).textContent = data.today || "XX";
-    document.getElementById("yesterday-" + b.id).textContent = data.yesterday || "XX";
-    if (data.name) {
-      document.getElementById("name-" + b.id).textContent = data.name;
-    }
-  });
+  const data = snap.val() || {};
 
-  startTimer(b);
+  const todayVal =
+    typeof data.today === "object"
+      ? data.today.value
+      : data.today || "XX";
+
+  const yesterdayVal =
+    typeof data.yesterday === "object"
+      ? data.yesterday.value
+      : data.yesterday || "XX";
+
+  document.getElementById("today-" + b.id).textContent = todayVal;
+  document.getElementById("yesterday-" + b.id).textContent = yesterdayVal;
+
+  document.getElementById("name-" + b.id).textContent =
+    data.name || b.name;
 });
 
 
