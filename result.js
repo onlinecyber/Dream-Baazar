@@ -16,13 +16,13 @@ import {
 // 🔥 FIREBASE CONFIG (APNI REAL KEYS DALO)
 // ------------------------------------
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "XXXXXXXX",
-  appId: "1:XXXX:web:XXXX"
+  apiKey: "AIzaSyBwqwNFAlRGPRRSPxLLSpryyDmpuCB6asc",
+  authDomain: "inzu-dae68.firebaseapp.com",
+  databaseURL: "https://inzu-dae68-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "inzu-dae68",
+  storageBucket: "inzu-dae68.firebasestorage.app",
+  messagingSenderId: "68573381004",
+  appId: "1:68573381004:web:935dc049c5b362141816a9"
 };
 
 const app = initializeApp(firebaseConfig);
