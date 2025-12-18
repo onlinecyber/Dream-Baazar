@@ -271,15 +271,29 @@
     <section id="admin-panel" class="hidden">
       <div class="admin-panel">
         <h3>Admin Panel</h3>
-        <p>Use secret URL <code>?admin=Sonu0786</code> or enter key below.</p>
-        <input id="adminKey" type="password" placeholder="Admin key">
-        <button id="unlockBtn">Unlock</button>
+        <section id="admin-panel" class="hidden">
+  <div class="admin-panel">
+    <h3>Admin Panel</h3>
+    <p>Open with <code>?admin=Sonu0786</code></p>
+
+    <div id="adminEditor" class="hidden">
+      <div id="adminFields"></div>
+
+      <div style="margin-top:10px">
+        <button id="saveBtn">Save Results</button>
+      </div>
+
+      <p id="adminNote"></p>
+    </div>
+  </div>
+</section>
+
 
         <div id="adminEditor" class="hidden">
           <div id="adminFields"></div>
           <div style="margin-top:10px">
             <button id="saveBtn">Save Results</button>
-            <button id="unlockUrlBtn">Clear DB Lock (admin only)</button>
+            
           </div>
           <p id="adminNote"></p>
         </div>
