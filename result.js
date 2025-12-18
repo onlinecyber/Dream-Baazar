@@ -193,10 +193,14 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
     if (!input) return;
 
     const newTodayValue = input.value.trim();
-    if (!newTodayValue) return;
+    if (!newTodayValue) return; // ⛔ empty → skip
 
-    // 🔁 OLD TODAY → YESTERDAY
-    const prevToday = oldData[b.id]?.today || {
+    const oldToday = oldData[b.id]?.today?.value || "XX";
+
+    // ⛔ SAME VALUE → DO NOTHING
+    if (newTodayValue === oldToday) return;
+
+    const oldTodayFull = oldData[b.id]?.today || {
       value: "XX",
       date: "N/A"
     };
@@ -204,9 +208,10 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
     updates["results/" + b.id] = {
       name: b.name,
 
+      // ✅ ONLY THIS BAZAR'S yesterday updates
       yesterday: {
-        value: prevToday.value || "XX",
-        date: prevToday.date || "N/A"
+        value: oldTodayFull.value,
+        date: oldTodayFull.date
       },
 
       today: {
@@ -216,11 +221,13 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
     };
   });
 
+  // ⛔ Nothing changed
+  if (Object.keys(updates).length === 0) {
+    alert("ℹ️ No changes detected");
+    return;
+  }
+
   await update(ref(db), updates);
 
-  alert("✅ Today saved & previous Today moved to Yesterday");
-});
-
-  await update(ref(db), updates);
-  alert("✔ Today updated, Yesterday auto-shifted");
+  alert("✅ Selected bazar updated. Yesterday shifted safely.");
 });
