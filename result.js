@@ -148,6 +148,7 @@ function startTimer(b) {
 if (new URLSearchParams(location.search).get("admin") === ADMIN_KEY) {
   adminPanel.classList.remove("hidden");
   adminEditor.classList.remove("hidden");
+  adminEditor.classList.remove("hidden");
   adminFields.style.display = "block";
   loadAdminFields();
 }
