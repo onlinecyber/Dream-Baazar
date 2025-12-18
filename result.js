@@ -164,13 +164,21 @@ async function loadAdminFields() {
   const data = snap.exists() ? snap.val() : {};
 
   BAZARS.forEach(b => {
+    const todayVal = data[b.id]?.today?.value || "";
+
     const row = document.createElement("div");
     row.className = "admin-row";
+
     row.innerHTML = `
-      <strong>${b.name}</strong>
-      <input id="t-${b.id}" placeholder="Today Result"
-        value="${data[b.id]?.today || ""}">
+      <label style="font-weight:600">${b.name}</label>
+      <input
+        id="edit-${b.id}"
+        placeholder="Today result"
+        value="${todayVal}"
+        style="padding:8px; margin-bottom:10px;"
+      />
     `;
+
     adminFields.appendChild(row);
   });
 }
@@ -185,7 +193,7 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
   const oldData = snap.exists() ? snap.val() : {};
 
   const updates = {};
-  const todayDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  const todayDate = new Date().toISOString().slice(0, 10);
 
   BAZARS.forEach(b => {
 
@@ -193,27 +201,15 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
     if (!input) return;
 
     const newTodayValue = input.value.trim();
-    if (!newTodayValue) return; // ⛔ empty → skip
+    if (!newTodayValue) return;
 
-    const oldToday = oldData[b.id]?.today?.value || "XX";
+    const oldTodayValue = oldData[b.id]?.today?.value || "XX";
 
-    // ⛔ SAME VALUE → DO NOTHING
-    if (newTodayValue === oldToday) return;
-
-    const oldTodayFull = oldData[b.id]?.today || {
-      value: "XX",
-      date: "N/A"
-    };
+    if (newTodayValue === oldTodayValue) return;
 
     updates["results/" + b.id] = {
       name: b.name,
-
-      // ✅ ONLY THIS BAZAR'S yesterday updates
-      yesterday: {
-        value: oldTodayFull.value,
-        date: oldTodayFull.date
-      },
-
+      yesterday: oldData[b.id]?.today || { value: "XX", date: "N/A" },
       today: {
         value: newTodayValue,
         date: todayDate
@@ -221,13 +217,12 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
     };
   });
 
-  // ⛔ Nothing changed
   if (Object.keys(updates).length === 0) {
-    alert("ℹ️ No changes detected");
+    alert("❌ No changes detected");
     return;
   }
 
   await update(ref(db), updates);
-
-  alert("✅ Selected bazar updated. Yesterday shifted safely.");
+  alert("✅ Result updated successfully");
 });
+
