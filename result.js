@@ -1,5 +1,5 @@
 // =====================================
-// FINAL result.js (NO LOCK SYSTEM)
+// FINAL result.js (CLEAN + AUTO SHIFT)
 // =====================================
 
 // Firebase imports
@@ -13,31 +13,30 @@ import {
 
 
 // ------------------------------------
-// YOUR FIREBASE CONFIG (correct one)
+// 🔥 FIREBASE CONFIG (APNI REAL KEYS DALO)
 // ------------------------------------
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  databaseURL: import.meta.env.VITE_FIREBASE_DB_URL,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "XXXXXXXX",
+  appId: "1:XXXX:web:XXXX"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 
 // ------------------------------------
-// Admin Key
+// 🔐 ADMIN KEY (URL BASED)
 // ------------------------------------
-const ADMIN_KEY = import.meta.env.VITE_ADMIN_KEY;
+const ADMIN_KEY = "Sonu0786";
 
 
 // ------------------------------------
-// MULTI BAZAR LIST
+// 🏪 BAZAR LIST (tumhari list)
 // ------------------------------------
 const BAZARS = [
   { id: 'khaja_garib', name: 'KHAJA GARIB', open: '09:30' },
@@ -51,11 +50,13 @@ const BAZARS = [
   { id: 'ram_mandir_5', name: 'RAM MANDIR 5', open: '15:00' },
   { id: 'east_dehli', name: 'EAST DEHLI', open: '09:30' },
   { id: 'faridabad_baba', name: 'FARIDABAD BABA', open: '11:00' },
-  { id: 'ganesh_matka' , name: 'GANESH MATKA', open: '10:00' }
+  { id: 'ganesh_matka', name: 'GANESH MATKA', open: '10:00' }
 ];
 
 
-// DOM elements
+// ------------------------------------
+// DOM
+// ------------------------------------
 const bazarsContainer = document.getElementById("bazars");
 const adminPanel = document.getElementById("admin-panel");
 const adminEditor = document.getElementById("adminEditor");
@@ -63,16 +64,15 @@ const adminFields = document.getElementById("adminFields");
 
 
 // ------------------------------------
-// Display all bazar cards
+// 🧱 CREATE BAZAR CARDS
 // ------------------------------------
 BAZARS.forEach(b => {
 
   const card = document.createElement("article");
   card.className = "bazar-card";
-  card.id = "card-" + b.id;
 
   card.innerHTML = `
-   <div>
+    <div>
       <div class="bazar-name" id="name-${b.id}">${b.name}</div>
       <div class="bazar-times">Open: ${b.open}</div>
       <div class="timer" id="timer-${b.id}">--:--:--</div>
@@ -95,83 +95,65 @@ BAZARS.forEach(b => {
 
   bazarsContainer.appendChild(card);
 
-  // Firebase listener
+  // 🔥 Firebase listener
   onValue(ref(db, "results/" + b.id), snap => {
-    const data = snap.val();
-    const r = data?.result || "--";
-    const n = data?.name || b.name; // Use Firebase name or default
-
-    document.getElementById("result-" + b.id).textContent = r;
-    document.getElementById("name-" + b.id).textContent = n;
+    const data = snap.val() || {};
+    document.getElementById("today-" + b.id).textContent = data.today || "XX";
+    document.getElementById("yesterday-" + b.id).textContent = data.yesterday || "XX";
+    if (data.name) {
+      document.getElementById("name-" + b.id).textContent = data.name;
+    }
   });
 
-  setupTimer(b);
+  startTimer(b);
 });
 
 
-
 // ------------------------------------
-// TIMER
+// ⏱ TIMER
 // ------------------------------------
-function parseTime(t) {
-  let [h, m] = t.split(":").map(Number);
-  return { h, m };
-}
+function startTimer(b) {
+  const el = document.getElementById("timer-" + b.id);
 
-function getNextTime(timeStr) {
-  const { h, m } = parseTime(timeStr);
-  const now = new Date();
-  let next = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0);
-  if (next < now) next.setDate(next.getDate() + 1);
-  return next;
-}
+  function nextTime(time) {
+    const [h, m] = time.split(":").map(Number);
+    const now = new Date();
+    let t = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
+    if (t < now) t.setDate(t.getDate() + 1);
+    return t;
+  }
 
-function setupTimer(b) {
-  const tEl = document.getElementById("timer-" + b.id);
-  let target = getNextTime(b.open);
+  let target = nextTime(b.open);
 
   setInterval(() => {
     let diff = target - new Date();
-
     if (diff <= 0) {
-      tEl.textContent = "00:00:00";
-      target = getNextTime(b.open);
-      return;
+      target = nextTime(b.open);
+      diff = target - new Date();
     }
-
-    const hr = Math.floor(diff / 3600000);
-    diff %= 3600000;
-
-    const mn = Math.floor(diff / 60000);
-    diff %= 60000;
-
-    const sc = Math.floor(diff / 1000);
-
-    tEl.textContent =
-      String(hr).padStart(2, "0") + ":" +
-      String(mn).padStart(2, "0") + ":" +
-      String(sc).padStart(2, "0");
-
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.textContent =
+      String(h).padStart(2, "0") + ":" +
+      String(m).padStart(2, "0") + ":" +
+      String(s).padStart(2, "0");
   }, 1000);
 }
 
 
-
 // ------------------------------------
-// ADMIN SECRET URL
+// 🔓 ADMIN MODE (?admin=Sonu0786)
 // ------------------------------------
-(function () {
-  const p = new URLSearchParams(location.search);
-  if (p.get("admin") === ADMIN_KEY) {
-    adminPanel.classList.remove("hidden");
-    adminEditor.classList.remove("hidden");
-    loadAdminFields();
-  }
-})();
+if (new URLSearchParams(location.search).get("admin") === ADMIN_KEY) {
+  adminPanel.classList.remove("hidden");
+  adminEditor.classList.remove("hidden");
+  loadAdminFields();
+}
 
 
 // ------------------------------------
-// LOAD ADMIN INPUT FIELDS
+// 🛠 ADMIN INPUTS (ONLY TODAY)
 // ------------------------------------
 async function loadAdminFields() {
   adminFields.innerHTML = "";
@@ -180,17 +162,12 @@ async function loadAdminFields() {
   const data = snap.exists() ? snap.val() : {};
 
   BAZARS.forEach(b => {
-    const val = data[b.id]?.result || "";
-    const nameVal = data[b.id]?.name || b.name;
-
     const row = document.createElement("div");
     row.className = "admin-row";
     row.innerHTML = `
-      <div style="display:flex; flex-direction:column; gap:5px; width:100%;">
-        <label>ID: ${b.id}</label>
-        <input id="name-edit-${b.id}" value="${nameVal}" placeholder="Bazar Name">
-        <input id="edit-${b.id}" maxlength="3" value="${val}" placeholder="Result">
-      </div>
+      <strong>${b.name}</strong>
+      <input id="t-${b.id}" placeholder="Today Result"
+        value="${data[b.id]?.today || ""}">
     `;
     adminFields.appendChild(row);
   });
@@ -198,32 +175,20 @@ async function loadAdminFields() {
 
 
 // ------------------------------------
-// ADMIN SAVE BUTTON
+// 💾 SAVE (AUTO SHIFT)
 // ------------------------------------
 document.getElementById("saveBtn")?.addEventListener("click", async () => {
 
-  const updates = {};
-
-  BAZARS.forEach(b => {
-    const v = document.getElementById("edit-" + b.id).value.trim();
-    const n = document.getElementById("name-edit-" + b.id).value.trim();
-
-    document.getElementById("saveBtn")?.addEventListener("click", async () => {
-
   const snap = await get(ref(db, "results"));
-  const oldData = snap.val() || {};
+  const oldData = snap.exists() ? snap.val() : {};
 
   const updates = {};
 
   BAZARS.forEach(b => {
-
-    const newToday =
-      document.getElementById("t-" + b.id).value.trim();
-
+    const newToday = document.getElementById("t-" + b.id).value.trim();
     if (!newToday) return;
 
-    const prevToday =
-      oldData[b.id]?.today || "XX";
+    const prevToday = oldData[b.id]?.today || "XX";
 
     updates["results/" + b.id] = {
       name: b.name,
@@ -233,13 +198,5 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
   });
 
   await update(ref(db), updates);
-  alert("Today result saved ✔ Yesterday auto-updated");
-});
-
-    
-  });
-
-  await update(ref(db), updates);
-
-  alert("Results & Names Updated Successfully!");
+  alert("✔ Today updated, Yesterday auto-shifted");
 });
