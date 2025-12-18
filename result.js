@@ -208,10 +208,35 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
     const v = document.getElementById("edit-" + b.id).value.trim();
     const n = document.getElementById("name-edit-" + b.id).value.trim();
 
+    document.getElementById("saveBtn")?.addEventListener("click", async () => {
+
+  const snap = await get(ref(db, "results"));
+  const oldData = snap.val() || {};
+
+  const updates = {};
+
+  BAZARS.forEach(b => {
+
+    const newToday =
+      document.getElementById("t-" + b.id).value.trim();
+
+    if (!newToday) return;
+
+    const prevToday =
+      oldData[b.id]?.today || "XX";
+
     updates["results/" + b.id] = {
-      result: v || "--",
-      name: n || b.name
+      name: b.name,
+      today: newToday,
+      yesterday: prevToday
     };
+  });
+
+  await update(ref(db), updates);
+  alert("Today result saved ✔ Yesterday auto-updated");
+});
+
+    
   });
 
   await update(ref(db), updates);
