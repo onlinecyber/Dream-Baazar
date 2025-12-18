@@ -100,20 +100,22 @@ BAZARS.forEach(b => {
   const data = snap.val() || {};
 
   const todayVal =
-    typeof data.today === "object"
+    data.today && typeof data.today === "object"
       ? data.today.value
       : data.today || "XX";
 
   const yesterdayVal =
-    typeof data.yesterday === "object"
+    data.yesterday && typeof data.yesterday === "object"
       ? data.yesterday.value
       : data.yesterday || "XX";
 
-  document.getElementById("today-" + b.id).textContent = todayVal;
-  document.getElementById("yesterday-" + b.id).textContent = yesterdayVal;
+  const todayEl = document.getElementById("today-" + b.id);
+  const yesterdayEl = document.getElementById("yesterday-" + b.id);
+  const nameEl = document.getElementById("name-" + b.id);
 
-  document.getElementById("name-" + b.id).textContent =
-    data.name || b.name;
+  if (todayEl) todayEl.textContent = todayVal;
+  if (yesterdayEl) yesterdayEl.textContent = yesterdayVal;
+  if (nameEl) nameEl.textContent = data.name || b.name;
 });
 
 
