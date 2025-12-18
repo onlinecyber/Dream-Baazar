@@ -185,19 +185,41 @@ document.getElementById("saveBtn")?.addEventListener("click", async () => {
   const oldData = snap.exists() ? snap.val() : {};
 
   const updates = {};
+  const todayDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 
   BAZARS.forEach(b => {
-    const newToday = document.getElementById("t-" + b.id).value.trim();
-    if (!newToday) return;
 
-    const prevToday = oldData[b.id]?.today || "XX";
+    const input = document.getElementById("edit-" + b.id);
+    if (!input) return;
+
+    const newTodayValue = input.value.trim();
+    if (!newTodayValue) return;
+
+    // 🔁 OLD TODAY → YESTERDAY
+    const prevToday = oldData[b.id]?.today || {
+      value: "XX",
+      date: "N/A"
+    };
 
     updates["results/" + b.id] = {
       name: b.name,
-      today: newToday,
-      yesterday: prevToday
+
+      yesterday: {
+        value: prevToday.value || "XX",
+        date: prevToday.date || "N/A"
+      },
+
+      today: {
+        value: newTodayValue,
+        date: todayDate
+      }
     };
   });
+
+  await update(ref(db), updates);
+
+  alert("✅ Today saved & previous Today moved to Yesterday");
+});
 
   await update(ref(db), updates);
   alert("✔ Today updated, Yesterday auto-shifted");
