@@ -285,16 +285,50 @@ footer{padding:12px;border-radius:12px;text-align:center;color:var(--muted);font
   text-align:center;
   margin:20px 0;
 }
-
 .whatsapp-msg{
   display:inline-block;
-  background:#dcf8c6;
-  padding:12px 16px;
-  border-radius:10px;
+  background:#25D366;          /* WhatsApp green */
+  color:#fff;
+  padding:12px 18px;
+  border-radius:12px;
   font-size:14px;
-  margin-bottom:10px;
+  font-weight:600;
+  margin-bottom:12px;
   position:relative;
+
+  /* POP EFFECT */
+  animation: popPulse 1.5s infinite;
+  box-shadow: 0 0 0 rgba(37, 211, 102, 0.7);
 }
+
+/* Arrow */
+.whatsapp-msg::after{
+  content:"";
+  position:absolute;
+  bottom:-8px;
+  left:50%;
+  transform:translateX(-50%);
+  border:8px solid transparent;
+  border-top-color:#25D366;
+}
+
+/* POP ANIMATION */
+@keyframes popPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+
 
 .whatsapp-msg::after{
   content:"";
