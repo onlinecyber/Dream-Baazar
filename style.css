@@ -343,14 +343,15 @@ footer{padding:12px;border-radius:12px;text-align:center;color:var(--muted);font
 .whatsapp-icons {
   width:500px;
   margin:0 10px;
-  border-radius:50%;
+  border-radius:10px;
   box-shadow:0 6px 15px rgba(0,0,0,.25);
 }
 .whatapp-icons a{
   text-decoration-line:none;
 }
 .whatapp-icons a i{
-  
+  width:60px;
+  height:60px;
 }
 /* ⛔ prevent green section bleed */
 .monthly-section,
