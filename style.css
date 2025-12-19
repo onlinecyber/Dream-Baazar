@@ -364,9 +364,9 @@ a{
 .whatsapp-icons i{
   font-size: 65px;           /* 👈 size yahin control hota hai */
   color: #25D366;
-  line-height:8px;
+  line-height:4px;
   background: #fff;
-  padding: 20px;
+  padding:0px;
   border-radius: 50%;
   box-shadow: 0 12px 28px rgba(0,0,0,0.25);
 }
