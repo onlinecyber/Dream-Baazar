@@ -205,3 +205,78 @@ footer{padding:12px;border-radius:12px;text-align:center;color:var(--muted);font
   display: block;
 }
 
+/* ===============================
+   MONTHLY CHART SECTION
+================================ */
+
+.monthly-section {
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+}
+
+.month-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.month-nav button {
+  flex: 1;
+  background: #1e6cff;
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.info-box {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 16px;
+  color: white;
+}
+
+.info-box.blue {
+  background: #1e6cff;
+}
+
+.chart-box {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.chart-box.yellow {
+  background: #ffc107;
+}
+
+.chart-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.chart-box select {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 2px solid #000;
+}
+
+.chart-box button {
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  background: #1e6cff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
