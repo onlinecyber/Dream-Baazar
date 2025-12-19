@@ -39,11 +39,11 @@ const ADMIN_KEY = "Sonu0786";
 // 🏪 BAZARS LIST
 // ------------------------------------
 const BAZARS = [
-  { id: 'khaja_garib', name: 'KHAJA GARIB', open: '09:30' },
-  { id: 'khaja_garib_nawaz', name: 'KHAJA GARIB NAWAZ', open: '10:30' },
-  { id: 'dehli_baba', name: 'DEHLI BABA', open: '11:45' },
-  { id: 'baba_ka_gali', name: 'BABA KA GALI', open: '11:45' },
-  { id: 'azmer_sharif', name: 'AZMER SHARIF', open: '12:30' },
+  { id: 'faridabad', name: 'FARIDABAD', open: '06:00 PM' },
+  { id: 'gali', name: 'GALI', open: '11:25 PM' },
+  { id: 'ghaziabad', name: 'GHAZIABAD', open: '9:25 PM' },
+  { id: 'desawar', name: 'DESAWAR', open: '05:00 PM' },
+  { id: 'delhi_bazar', name: 'DELHI BAZAR', open: '03:00 PM' },
   { id: 'dehli_nor_yalai', name: 'DEHLI NOR YALAI', open: '18:30' },
   { id: 'noida_bazar', name: 'NOIDA BAZAR', open: '16:30' },
   { id: 'ahmedabad_city', name: 'AHMEDABAD CITY', open: '12:30' },
