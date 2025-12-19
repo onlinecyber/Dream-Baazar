@@ -282,9 +282,14 @@ footer{padding:12px;border-radius:12px;text-align:center;color:var(--muted);font
 /* ================= WHATSAPP SECTION ================= */
 
 .whatsapp-section{
-  text-align:center;
-  margin:20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* 👈 REAL CENTER */
+  justify-content: center;
+  margin: 25px 0;
 }
+
 .whatsapp-msg{
   display:inline-block;
   background:#25D366;          /* WhatsApp green */
@@ -341,12 +346,14 @@ footer{padding:12px;border-radius:12px;text-align:center;color:var(--muted);font
 }
 
 .whatsapp-icons{
+  width: 100%;
   display: flex;
-  justify-content: center;   /* 👈 exact center */
+  justify-content: center;   /* 👈 icons exact center */
   align-items: center;
-  gap: 25px;                 /* icons ke beech space */
+  gap: 25px;
   margin-top: 15px;
 }
+
 
 .whatapp-icons a{
   text-decoration-line:none;
@@ -355,13 +362,12 @@ a{
   text-decoration:none;
 }
 .whatsapp-icons i{
-  font-size: 60px;           /* 👈 size yahin se control */
+  font-size: 65px;           /* 👈 size yahin control hota hai */
   color: #25D366;
   background: #fff;
-  padding: 18px;
+  padding: 20px;
   border-radius: 50%;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-  animation: iconPop 1.5s infinite;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
 }
 
 @keyframes iconPop {
