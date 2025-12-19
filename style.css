@@ -362,11 +362,11 @@ a{
   text-decoration:none;
 }
 .whatsapp-icons i{
-  font-size: 65px;           /* 👈 size yahin control hota hai */
+  font-size: 60px;           /* 👈 size yahin control hota hai */
   color: #25D366;
-  line-height:1px;
+  line-height:0px;
   background: #fff;
-  padding:10px;
+  padding:5px;
   padding-top:20px;
   border-radius: 50%;
   box-shadow: 0 12px 28px rgba(0,0,0,0.25);
