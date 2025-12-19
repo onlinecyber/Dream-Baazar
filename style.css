@@ -352,6 +352,23 @@ footer{padding:12px;border-radius:12px;text-align:center;color:var(--muted);font
 a{
   text-decoration:none;
 }
+.whatsapp-icons i{
+  font-size: 55px;        /* 👈 YAHI SE SIZE CONTROL HOGA */
+  color: #25D366;
+  margin: 0 15px;
+  padding: 15px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+  animation: iconPop 1.5s infinite;
+}
+@keyframes iconPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
 
 .fa-brands{
   width:70px;
