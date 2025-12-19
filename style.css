@@ -349,7 +349,8 @@ footer{padding:12px;border-radius:12px;text-align:center;color:var(--muted);font
 .whatapp-icons a{
   text-decoration-line:none;
 }
-.whatapp-icons a .fa-brands{
+
+.fa-brands{
   width:60px;
   height:60px;
   margin-left:30px;
