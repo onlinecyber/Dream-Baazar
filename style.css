@@ -354,9 +354,9 @@ a{
 }
 
 .fa-brands{
-  width:200px;
-  height:200pxpx;
-  margin-left:30px;
+  width:70px;
+  height:70px;
+  margin-left:30px 40p;
 }
 /* ⛔ prevent green section bleed */
 .monthly-section,
