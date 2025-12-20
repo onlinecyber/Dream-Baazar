@@ -480,4 +480,6 @@ a{
   font-weight:800;
   letter-spacing:.5px;
 }
-
+.timer{
+  display:none;
+}
