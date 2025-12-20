@@ -93,7 +93,7 @@ BAZARS.forEach(b => {
     <div>
       <div class="bazar-name" id="name-${b.id}">${b.name}</div>
       <div class="bazar-times">Open: ${formatAMPM(b.open)}</div>
-      <div class="timer" id="timer-${b.id}">--:--:--</div>
+    //  <div class="timer" id="timer-${b.id}">--:--:--</div> 
     </div>
 
     <div class="result-wrap">
@@ -135,6 +135,7 @@ BAZARS.forEach(b => {
 // ------------------------------------
 // TIMER
 // ------------------------------------
+/*
 function startTimer(b) {
   const el = document.getElementById("timer-" + b.id);
 
@@ -163,6 +164,7 @@ function startTimer(b) {
       String(s).padStart(2, "0");
   }, 1000);
 }
+*/
 
 
 // ------------------------------------
