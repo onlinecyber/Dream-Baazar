@@ -63,6 +63,13 @@ function cleanValue(v) {
   if (typeof v === "object" && v.value) return String(v.value);
   return "XX";
 }
+function formatAMPM(time) {
+  const [hour, minute] = time.split(":").map(Number);
+  const ampm = hour >= 12 ? "PM" : "AM";
+  const h = hour % 12 || 12;
+  return `${h}:${String(minute).padStart(2, "0")} ${ampm}`;
+}
+
 
 
 // ------------------------------------
@@ -85,14 +92,14 @@ BAZARS.forEach(b => {
   card.innerHTML = `
     <div>
       <div class="bazar-name" id="name-${b.id}">${b.name}</div>
-      <div class="bazar-times">Open: ${b.open}</div>
+      <div class="bazar-times">Open: ${formatAMPM(b.open)}</div>
       <div class="timer" id="timer-${b.id}">--:--:--</div>
     </div>
 
     <div class="result-wrap">
       <div class="result-title">Result</div>
       <div class="result-row">
-        <div class="result-item">
+        <div class="result-item"
           <span class="result-label">कल</span>
           <div class="result-box" id="yesterday-${b.id}">XX</div>
         </div>
