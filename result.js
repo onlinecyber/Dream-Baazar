@@ -93,7 +93,7 @@ BAZARS.forEach(b => {
     <div>
       <div class="bazar-name" id="name-${b.id}">${b.name}</div>
       <div class="bazar-times">Open: ${formatAMPM(b.open)}</div>
-    //  <div class="timer" id="timer-${b.id}">--:--:--</div> 
+      <div class="timer" id="timer-${b.id}">--:--:--</div> 
     </div>
 
     <div class="result-wrap">
