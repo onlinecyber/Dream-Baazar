@@ -135,7 +135,7 @@ BAZARS.forEach(b => {
 // ------------------------------------
 // TIMER
 // ------------------------------------
-/*
+
 function startTimer(b) {
   const el = document.getElementById("timer-" + b.id);
 
@@ -164,7 +164,7 @@ function startTimer(b) {
       String(s).padStart(2, "0");
   }, 1000);
 }
-*/
+
 
 
 // ------------------------------------
